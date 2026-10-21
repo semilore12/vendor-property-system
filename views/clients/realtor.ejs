@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= realtor.username %> | Realtor Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+
+    <header class="auth-header">
+        <a href="/" class="auth-brand">Vendor<span>Property</span></a>
+        <a href="/" class="back-home">Back to Home</a>
+    </header>
+
+    <main class="realtor-container">
+        <section class="realtor-profile">
+            <p class="auth-eyebrow">REALTOR PROFILE</p>
+            <h1><%= realtor.username %></h1>
+            <p><strong>Email:</strong> <%= realtor.email %></p>
+            <p>Explore properties listed by this realtor below.</p>
+        </section>
+
+        <section>
+            <h2 class="realtor-heading">Properties for Sale</h2>
+
+            <% if (properties.length === 0) { %>
+                <div class="auth-card">
+                    <h3>No properties listed yet</h3>
+                    <p class="auth-subtitle">This realtor hasn't added any properties for sale.</p>
+                </div>
+            <% } else { %>
+                <div class="properties-grid">
+                    <% properties.forEach(function(property) { %>
+                        <article class="property-card">
+                            <h3><%= property.title %></h3>
+                            <p><strong>Location:</strong> <%= property.location %></p>
+                            <p class="property-price">
+                                ₦<%= Number(property.price).toLocaleString('en-NG') %>
+                            </p>
+                            <p><strong>Property Type:</strong> <%= property.property_type %></p>
+                            <p><strong>Description:</strong>
+                                <%= property.description || 'No description provided.' %>
+                            </p>
+                        </article>
+                    <% }); %>
+                </div>
+            <% } %>
+        </section>
+
+        <a href="/" class="dashboard-home">← Back to Homepage</a>
+    </main>
+
+    <footer class="auth-footer">
+        &copy; <%= new Date().getFullYear() %> Vendor Property System.
+        All rights reserved.
+    </footer>
+
+</body>
+</html>

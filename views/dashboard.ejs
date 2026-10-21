@@ -1,0 +1,58 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtor Dashboard | Vendor Property System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-page">
+
+    <header class="auth-header">
+        <a href="/" class="auth-brand">Vendor<span>Property</span></a>
+        <form action="/logout" method="POST">
+            <button type="submit" class="dashboard-logout">Logout</button>
+        </form>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="dashboard-welcome">
+            <p class="auth-eyebrow">REALTOR DASHBOARD</p>
+            <h1>Welcome back, <%= username %>!</h1>
+            <p>Manage your property listings and connect with potential buyers.</p>
+        </section>
+
+        <section class="dashboard-cards">
+            <a href="/properties/add" class="dashboard-card">
+                <span class="dashboard-icon">+</span>
+                <h2>Add a Property</h2>
+                <p>List a new property for sale.</p>
+                <span class="dashboard-link">Add property →</span>
+            </a>
+
+            <a href="/properties/my-properties" class="dashboard-card">
+                <span class="dashboard-icon">⌂</span>
+                <h2>My Properties</h2>
+                <p>View, edit, or delete your listings.</p>
+                <span class="dashboard-link">Manage properties →</span>
+            </a>
+
+            <a href="/search" class="dashboard-card">
+                <span class="dashboard-icon">⌕</span>
+                <h2>Find Realtors</h2>
+                <p>Visit the public realtor search page.</p>
+                <span class="dashboard-link">Explore →</span>
+            </a>
+        </section>
+
+        <a href="/" class="dashboard-home">← Back to Homepage</a>
+    </main>
+
+    <footer class="auth-footer">
+        &copy; <%= new Date().getFullYear() %> Vendor Property System.
+        All rights reserved.
+    </footer>
+
+</body>
+</html>

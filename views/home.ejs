@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Property System | Find Your Property</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="home-page">
+
+    <header class="site-header">
+        <a href="/" class="brand">
+            <span class="brand-icon">V</span>
+            <span>Vendor<span class="brand-highlight">Property</span></span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="/" class="active">Home</a>
+            <a href="/login">Realtor Login</a>
+            <a href="/register" class="nav-button">Become a Realtor</a>
+        </nav>
+    </header>
+
+    <main class="home-main">
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">YOUR PROPERTY JOURNEY STARTS HERE</p>
+
+                <h1>
+                    Find a Place to Call
+                    <span>Home.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Discover properties for sale by connecting directly
+                    with realtors. Your next property could be one search away.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#realtor-search" class="primary-button">
+                        Find a Realtor
+                    </a>
+                    <a href="/register" class="secondary-button">
+                        List Your Properties
+                    </a>
+                </div>
+
+                <div class="hero-note">
+                    <span class="gold-dot"></span>
+                    Connect with realtors. Discover available properties.
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-decoration"></div>
+
+                <div class="property-illustration">
+                    <div class="illustration-roof"></div>
+
+                    <div class="illustration-house">
+                        <div class="house-window window-left"></div>
+                        <div class="house-window window-right"></div>
+                        <div class="house-door"></div>
+                    </div>
+
+                    <div class="illustration-base"></div>
+                </div>
+
+                <div class="visual-label">
+                    <span class="label-dot"></span>
+                    <div>
+                        <strong>Your next chapter</strong>
+                        <p>Begins with the right property</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-section" id="realtor-search">
+            <div class="search-heading">
+                <p class="eyebrow">START YOUR SEARCH</p>
+                <h2>Find a Trusted Realtor</h2>
+                <p>
+                    Enter a realtor's username to explore their profile
+                    and available properties.
+                </p>
+            </div>
+
+            <form action="/search" method="GET" class="realtor-search-form">
+                <div class="search-input-group">
+                    <label for="username">Realtor username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter realtor username"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="search-button">
+                    Search Realtors
+                    <span aria-hidden="true">&rarr;</span>
+                </button>
+            </form>
+        </section>
+
+        <section class="benefits">
+            <div class="benefit">
+                <span class="benefit-number">01</span>
+                <h3>Find Realtors</h3>
+                <p>Search for a realtor using their username.</p>
+            </div>
+
+            <div class="benefit">
+                <span class="benefit-number">02</span>
+                <h3>Explore Properties</h3>
+                <p>View property details, locations, and prices.</p>
+            </div>
+
+            <div class="benefit">
+                <span class="benefit-number">03</span>
+                <h3>Connect with Confidence</h3>
+                <p>View realtor details to help with your search.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <%= new Date().getFullYear() %> Vendor Property System.</p>
+        <p>Helping you find your next property.</p>
+    </footer>
+
+</body>
+</html>

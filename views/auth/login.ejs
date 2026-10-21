@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Realtor Login | Vendor Property System</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+
+    <header class="auth-header">
+        <a href="/" class="auth-brand">
+            Vendor<span>Property</span>
+        </a>
+
+        <a href="/" class="back-home">Back to Home</a>
+    </header>
+
+    <main class="auth-container">
+
+        <section class="auth-intro">
+            <p class="auth-eyebrow">WELCOME BACK</p>
+
+            <h1>Your next property sale starts here.</h1>
+
+            <p>
+                Sign in to manage your properties, update your listings,
+                and connect with potential clients.
+            </p>
+
+            <div class="auth-note">
+                Your properties. Your business. Your opportunities.
+            </div>
+        </section>
+
+        <section class="auth-card">
+            <h2>Realtor Login</h2>
+
+            <p class="auth-subtitle">
+                Enter your account details to continue.
+            </p>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="auth-error">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/login" method="POST">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="auth-button">
+                    Sign In
+                </button>
+
+            </form>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a href="/register">Become a Realtor</a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="auth-footer">
+        &copy; <%= new Date().getFullYear() %> Vendor Property System.
+        All rights reserved.
+    </footer>
+
+</body>
+</html>
+```

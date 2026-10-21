@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Property | Vendor Property System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+
+    <header class="auth-header">
+        <a href="/" class="auth-brand">Vendor<span>Property</span></a>
+        <a href="/dashboard" class="back-home">Dashboard</a>
+    </header>
+
+    <main class="property-form-container">
+        <section class="auth-card">
+            <p class="auth-eyebrow">UPDATE YOUR LISTING</p>
+            <h2>Edit Property</h2>
+            <p class="auth-subtitle">Make changes to your property details below.</p>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="auth-error"><%= error %></div>
+            <% } %>
+
+            <form action="/properties/edit/<%= property.id %>" method="POST">
+                <div class="form-group">
+                    <label for="title">Property Title</label>
+                    <input type="text" id="title" name="title"
+                           value="<%= property.title %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required><%= property.description %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price (₦)</label>
+                    <input type="number" id="price" name="price" min="1" step="0.01"
+                           value="<%= property.price %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location"
+                           value="<%= property.location %>" required>
+                </div>
+
+                <button type="submit" class="auth-button">Save Changes</button>
+            </form>
+
+            <p class="auth-switch">
+                <a href="/properties/my-properties">Cancel and go back</a>
+            </p>
+        </section>
+    </main>
+
+    <footer class="auth-footer">
+        &copy; <%= new Date().getFullYear() %> Vendor Property System.
+        All rights reserved.
+    </footer>
+
+</body>
+</html>
