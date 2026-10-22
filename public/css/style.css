@@ -331,7 +331,7 @@ hr {
     flex-shrink: 0;
 }
 
-/* Decorative house illustration */
+
 
 .home-page .hero-visual {
     min-height: 350px;
@@ -697,7 +697,7 @@ hr {
             rgba(16, 40, 62, 0.03) 35%,
             rgba(16, 40, 62, 0.35) 100%
         ),
-        url();
+        url('pexels-jakub-pabis-147246622-19963719.jpg');
 
     background-size: cover;
     background-position: center;
