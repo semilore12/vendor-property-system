@@ -35,9 +35,26 @@ app.use('/', authRoutes);
 app.use('/properties', propertyRoutes);
 app.use('/', clientRoutes);
 
-app.get('/', (req, res) => {
-    res.render('home');
+
+app.get('/', async (req, res) => {
+    try {
+        const [properties] = await db.query(`
+            SELECT properties.*, users.username
+            FROM properties
+            JOIN users ON properties.user_id = users.id
+            ORDER BY properties.created_at DESC
+        `);
+
+        res.render('home', {
+            properties: properties
+        });
+
+    } catch (error) {
+        console.error('Homepage properties error:', error.message);
+        res.status(500).send('Could not load homepage properties.');
+    }
 });
+
 
 
 app.listen(3000, async () => {

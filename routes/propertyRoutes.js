@@ -4,19 +4,30 @@ const router = express.Router();
 
 const propertyController = require('../controllers/propertyController');
 const isAuthenticated = require('../middleware/authMiddleware');
+const upload = require('../middleware/uploadMiddleware');
 
 // Display the add-property form
 router.get('/add', isAuthenticated, propertyController.showAddPropertyForm);
 
-// Process the submitted property form
-router.post('/add', isAuthenticated, propertyController.addProperty);
+// Save a property with an optional image
+router.post(
+    '/add',
+    isAuthenticated,
+    upload.single('image'),
+    propertyController.addProperty
+);
 
 router.get('/my-properties', isAuthenticated, propertyController.viewProperties);
 
-
 router.get('/edit/:id', isAuthenticated, propertyController.showEditPropertyForm);
 
-router.post('/edit/:id', isAuthenticated, propertyController.updateProperty);
+// Update a property with an optional new image
+router.post(
+    '/edit/:id',
+    isAuthenticated,
+    upload.single('image'),
+    propertyController.updateProperty
+);
 
 router.post('/delete/:id', isAuthenticated, propertyController.deleteProperty);
 

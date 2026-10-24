@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,6 +124,44 @@
                 <p>View realtor details to help with your search.</p>
             </div>
         </section>
+
+<section class="home-listings" id="available-properties">
+    <div class="search-heading">
+        <p class="eyebrow">LATEST LISTINGS</p>
+        <h2>Properties for Sale</h2>
+        <p>Explore properties listed by our realtors.</p>
+    </div>
+
+    <% if (properties && properties.length > 0) { %>
+        <div class="properties-grid">
+            <% properties.forEach(property => { %>
+                <article class="property-card">
+                    <% if (property.image) { %>
+                        <img src="<%= property.image %>"
+                             alt="<%= property.title %>"
+                             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    <% } %>
+
+                    <h3><%= property.title %></h3>
+                    <p><strong>Location:</strong> <%= property.location %></p>
+                    <p class="property-price">
+                        ₦<%= Number(property.price).toLocaleString() %>
+                    </p>
+                    <p>
+                        <strong>Realtor:</strong>
+                        <%= property.username %>
+                    </p>
+
+                    <a href="/search?username=<%= encodeURIComponent(property.username) %>"
+                       class="properties-add">View Realtor</a>
+                </article>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p class="auth-subtitle">No properties have been listed yet. Please check back soon.</p>
+    <% } %>
+</section>
+
     </main>
 
     <footer class="site-footer">

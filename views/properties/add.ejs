@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
                 <div class="auth-error"><%= error %></div>
             <% } %>
 
-            <form action="/properties/add" method="POST">
+            <form action="/properties/add" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Property Title</label>
                     <input type="text" id="title" name="title"
@@ -46,6 +47,13 @@
                     <label for="location">Location</label>
                     <input type="text" id="location" name="location"
                            placeholder="e.g. Lekki, Lagos" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Property Image (Optional)</label>
+                    <input type="file" id="image" name="image"
+                           accept="image/jpeg,image/png,image/webp">
+                    <small>You can upload a JPG, PNG, or WebP image, up to 5 MB.</small>
                 </div>
 
                 <button type="submit" class="auth-button">Add Property</button>

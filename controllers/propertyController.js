@@ -6,7 +6,7 @@ exports.showAddPropertyForm = (req, res) => {
     res.render('properties/add');
 };
 
-// Save a new property to the database
+// Save a new property with an optional image
 exports.addProperty = async (req, res) => {
     try {
         const {
@@ -17,17 +17,22 @@ exports.addProperty = async (req, res) => {
             property_type
         } = req.body;
 
+        const image = req.file
+            ? '/uploads/' + req.file.filename
+            : null;
+
         await db.query(
             `INSERT INTO properties
-            (user_id, title, description, location, price, property_type)
-            VALUES (?, ?, ?, ?, ?, ?)`,
+            (user_id, title, description, location, price, property_type, image)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
                 req.session.userId,
                 title,
                 description,
                 location,
                 price,
-                property_type
+                property_type || 'Other',
+                image
             ]
         );
 
@@ -39,7 +44,7 @@ exports.addProperty = async (req, res) => {
     }
 };
 
- // Display properties belonging to the logged-in vendor
+// Display properties belonging to the logged-in vendor
 exports.viewProperties = async (req, res) => {
     try {
         const [properties] = await db.query(
@@ -48,7 +53,7 @@ exports.viewProperties = async (req, res) => {
         );
 
         return res.render('properties/list', {
-            properties: properties
+            properties
         });
 
     } catch (error) {
@@ -57,7 +62,7 @@ exports.viewProperties = async (req, res) => {
     }
 };
 
- // Display the edit form for a property
+// Display the edit form for a property
 exports.showEditPropertyForm = async (req, res) => {
     try {
         const [properties] = await db.query(
@@ -79,8 +84,7 @@ exports.showEditPropertyForm = async (req, res) => {
     }
 };
 
-
-
+// Update a property and optionally replace its image
 exports.updateProperty = async (req, res) => {
     try {
         const {
@@ -91,24 +95,40 @@ exports.updateProperty = async (req, res) => {
             property_type
         } = req.body;
 
+        const image = req.file
+            ? '/uploads/' + req.file.filename
+            : null;
+
         const [result] = await db.query(
             `UPDATE properties
-             SET title = ?, description = ?, location = ?,
-                 price = ?, property_type = ?
+             SET title = ?,
+                 description = ?,
+                 location = ?,
+                 price = ?,
+                 property_type = COALESCE(?, property_type),
+                 image = COALESCE(?, image)
              WHERE id = ? AND user_id = ?`,
             [
                 title,
                 description,
                 location,
                 price,
-                property_type,
+                property_type || null,
+                image,
                 req.params.id,
                 req.session.userId
             ]
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).send('Property not found.');
+            const [properties] = await db.query(
+                'SELECT id FROM properties WHERE id = ? AND user_id = ?',
+                [req.params.id, req.session.userId]
+            );
+
+            if (properties.length === 0) {
+                return res.status(404).send('Property not found.');
+            }
         }
 
         return res.redirect('/properties/my-properties');
@@ -119,7 +139,7 @@ exports.updateProperty = async (req, res) => {
     }
 };
 
- // Delete a property belonging to the logged-in vendor
+// Delete a property belonging to the logged-in vendor
 exports.deleteProperty = async (req, res) => {
     try {
         const [result] = await db.query(
@@ -138,4 +158,3 @@ exports.deleteProperty = async (req, res) => {
         return res.status(500).send('Could not delete property.');
     }
 };
-
